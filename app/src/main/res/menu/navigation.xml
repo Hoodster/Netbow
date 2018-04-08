@@ -12,7 +12,7 @@
         android:title="Polecane" />
 
     <item
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_profile"
         android:icon="@drawable/profile"
         android:title="Profil" />
 
