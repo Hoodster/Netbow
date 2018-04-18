@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1024148038191",
+    "firebase_url": "https://netbow-3248f.firebaseio.com",
+    "project_id": "netbow-3248f",
+    "storage_bucket": "netbow-3248f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1024148038191:android:d6d6bdeb0f58e323",
+        "android_client_info": {
+          "package_name": "com.oxbow.netbow"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1024148038191-fe10deqe6nruakb5rdchfduemd8mc1h9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.oxbow.netbow",
+            "certificate_hash": "2a1ba84999892d83912ddacf303a20249b7904f6"
+          }
+        },
+        {
+          "client_id": "1024148038191-uhoks1li7n1uvhhm2n6l153h235uvp3o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnnxHeB49Ncol2bpAZIi7U2UTRDqXMXnA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1024148038191-uhoks1li7n1uvhhm2n6l153h235uvp3o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
