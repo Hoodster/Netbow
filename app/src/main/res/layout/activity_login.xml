@@ -2,6 +2,7 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayout"
     android:gravity="center" android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.oxbow.netbow.LoginActivity">
@@ -39,7 +40,7 @@
         android:layout_marginRight="30dp"
         android:hint="hasło"
         android:inputType="textPassword"
-        android:layout_marginBottom="25dp"/>
+        android:layout_marginBottom="30dp"/>
 
     <Button
         android:id="@+id/tryLogin"
@@ -47,11 +48,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/passwordLogin"
         android:layout_centerHorizontal="true"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp"
+        android:background="@drawable/roundbutton"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:background="@color/colorAccent"
         android:text="zaloguj"/>
     </RelativeLayout>
     <!--REGISTER-->
@@ -79,7 +80,7 @@
             android:layout_marginRight="30dp"
             android:hint="hasło"
             android:inputType="textPassword"
-            android:layout_marginBottom="20dp"/>
+            android:layout_marginBottom="30dp"/>
 
         <Button
             android:id="@+id/tryRegister"
@@ -87,11 +88,12 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/registerPassword"
             android:layout_centerHorizontal="true"
-            android:paddingLeft="30dp"
-            android:paddingRight="30dp"
+            android:background="@drawable/roundbutton"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:background="@color/colorAccent"
+
             android:text="zarejestruj"/>
     </RelativeLayout>
 

@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SharedPreferences loginPref = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences loginPref = getSharedPreferences("loginPrefs",MODE_PRIVATE);
         String login = loginPref.getString("login",null);
 
         if (login == null) {
