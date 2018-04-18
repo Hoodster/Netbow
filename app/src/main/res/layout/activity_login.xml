@@ -2,10 +2,19 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:gravity="center"
-    android:layout_width="match_parent"
+    android:gravity="center" android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.oxbow.netbow.LoginActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_gravity="top"
+        android:layout_marginTop="80dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/netbow" />
 
     <!--LOGIN-->
     <RelativeLayout
@@ -30,7 +39,7 @@
         android:layout_marginRight="30dp"
         android:hint="hasło"
         android:inputType="textPassword"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginBottom="25dp"/>
 
     <Button
         android:id="@+id/tryLogin"
@@ -60,20 +69,12 @@
             android:layout_marginRight="30dp"
             android:hint="login"
             android:layout_marginBottom="20dp"/>
-        <EditText
-            android:id="@+id/registerName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/registerLogin"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:hint="imię"
-            android:layout_marginBottom="20dp"/>
+
         <EditText
             android:id="@+id/registerPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/registerName"
+            android:layout_below="@id/registerLogin"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:hint="hasło"

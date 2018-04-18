@@ -9,13 +9,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
+import android.util.Xml;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -39,7 +43,6 @@ DatabaseReference db;
 
 
         registerLogin = findViewById(R.id.registerLogin);
-        registerName = findViewById(R.id.registerName);
         registerPassword = findViewById(R.id.registerPassword);
 
        db = FirebaseDatabase.getInstance().getReference();
@@ -70,7 +73,7 @@ DatabaseReference db;
                 byte[] passwordCode = registerPassword.getText().toString().getBytes();
                 passwordEncrypted = Base64.encodeToString(passwordCode,Base64.DEFAULT);
                 //write to database
-               User e = new User(registerLogin.getText().toString(), registerName.getText().toString(), passwordEncrypted);
+               User e = new User(registerLogin.getText().toString(), passwordEncrypted);
                 db.child("users").child(registerLogin.getText().toString()).setValue(e);
                 //save login as local key value
                 SharedPreferences loginPref = LoginActivity.this.getPreferences(Context.MODE_PRIVATE);
@@ -78,11 +81,44 @@ DatabaseReference db;
                 editor.putString("login",registerLogin.getText().toString()).commit();
 
                 //back to main activity
-                Intent i = new Intent(LoginActivity.this, MainActivity.class);
+              //  Intent i = new Intent(LoginActivity.this, MainActivity.class);
                 //clear stack
-                i.putExtra("loginTemp",registerLogin.getText().toString());
-                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(i);
+             //   i.putExtra("loginTemp",registerLogin.getText().toString());
+              //  i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+              //  startActivity(i);
+            }
+        });
+
+        login = findViewById(R.id.tryLogin);
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //get value
+                ValueEventListener postListener = new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        User user = dataSnapshot.child(loginLogin.getText().toString()).getValue(User.class);
+                        byte[] password = Base64.decode(user.password, Base64.DEFAULT) ;
+                        if (loginPassword.getText().toString() == password.toString()) {
+                            SharedPreferences loginPref = LoginActivity.this.getPreferences(Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = loginPref.edit();
+                            editor.putString("login",loginLogin.getText().toString()).commit();
+
+                            //back to main activity
+                            Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                            //clear stack
+                            i.putExtra("loginTemp",loginLogin.getText().toString());
+                            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(i);
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                };
             }
         });
     }

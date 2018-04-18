@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SharedPreferences loginPref = MainActivity.this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences loginPref = PreferenceManager.getDefaultSharedPreferences(this);
         String login = loginPref.getString("login",null);
 
         if (login == null) {
