@@ -119,29 +119,30 @@ DatabaseReference db;
                             byte[] bytepassword = Base64.decode(user.password, Base64.DEFAULT);
                             password = new String(bytepassword, StandardCharsets.UTF_8);
                         } else {
-                            Snackbar.make(coordinatorLayout,"Zjebało się. Miłego dnia!", Snackbar.LENGTH_LONG).show();
+                            Snackbar.make(coordinatorLayout,"Czas najwyższy zapłacić za ten serwer...", Snackbar.LENGTH_LONG).show();
                         }
 
-                      //  if (typedpassword == password) {
+                        if (typedpassword.equals(password)) {
                             SharedPreferences loginPref = getSharedPreferences("loginPrefs",Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = loginPref.edit();
                             editor.putString("login", loginLogin.getText().toString());
                             editor.commit();
-
+                            Snackbar.make(coordinatorLayout, "Zalogowałeś się jako " + loginLogin.getText().toString() + ".",Snackbar.LENGTH_LONG).show();
                             //back to main activity
                             Intent i = new Intent(LoginActivity.this, MainActivity.class);
                             //clear stack
                             i.putExtra("loginTemp", loginLogin.getText().toString());
                             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(i);
-                      //  } else {
-                     //       Snackbar.make(coordinatorLayout, "Nie to hasło, zią", Snackbar.LENGTH_LONG).show();
-                     //   }
+
+                        } else {
+                           Snackbar.make(coordinatorLayout, "Nie ten login lub hasło, zią.", Snackbar.LENGTH_LONG).show();
+                        }
                     }
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
-                        Snackbar.make(coordinatorLayout,"błąd",Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(coordinatorLayout,"Następnym razem będzie lepiej, wierzę w Ciebie.",Snackbar.LENGTH_SHORT).show();
                     }
                 });
             }
