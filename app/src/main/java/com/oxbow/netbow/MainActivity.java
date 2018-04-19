@@ -16,7 +16,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity implements MainListFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
 
@@ -68,8 +68,4 @@ public class MainActivity extends AppCompatActivity implements MainListFragment.
         super.onResume();
     }
 
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
 }

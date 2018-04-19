@@ -4,8 +4,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:fitsSystemWindows="false">
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/toolbar_layout"
@@ -18,17 +17,25 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:title="TEST"
+                app:titleTextAppearance="@style/ToolbarTitleAppearance"
+                app:subtitleTextAppearance="@style/ToolbarSubtitleAppearance"
                 android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 app:layout_collapseMode="pin"/>
+            <ImageView
+                android:id="@+id/tileCover"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerInside"/>
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar1"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:layout_gravity="bottom"
-                app:title="TEST2"
+                app:titleTextAppearance="@style/ToolbarTitleAppearance"
+                app:subtitleTextAppearance="@style/ToolbarSubtitleAppearance"
+                android:background="@color/opacityblack"
                 android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 app:layout_collapseMode="pin"/>
