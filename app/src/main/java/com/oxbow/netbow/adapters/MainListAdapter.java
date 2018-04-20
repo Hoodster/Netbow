@@ -7,6 +7,7 @@ import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,13 +16,15 @@ import android.widget.Toolbar;
 import com.oxbow.netbow.R;
 import com.oxbow.netbow.data.Serie;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class MainListAdapter extends BaseAdapter {
+public class MainListAdapter extends ArrayAdapter<Serie> {
     private Context context;
     private List<Serie> series;
 
     public MainListAdapter(Context context, List<Serie> series) {
+        super(context,R.layout.item_main_series,series);
         this.context = context;
         this.series = series;
     }
