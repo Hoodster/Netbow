@@ -1,5 +1,6 @@
 package com.oxbow.netbow.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.os.Build;
@@ -31,9 +32,10 @@ public class MainListAdapter extends ArrayAdapter<Serie> {
 
     public class ViewHolder {
         ImageView serieCover;
-        Toolbar serieMetaData;
+        TextView title,categories;
     }
 
+    @SuppressLint("SetTextI18n")
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
@@ -45,14 +47,16 @@ public class MainListAdapter extends ArrayAdapter<Serie> {
             view = inflater.inflate(R.layout.item_main_series,null);
 
             holder.serieCover = view.findViewById(R.id.tileCover);
-            holder.serieMetaData = view.findViewById(R.id.toolbar1);
+            holder.title = view.findViewById(R.id.serieTitle);
+            holder.categories = view.findViewById(R.id.serieCategories);
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();
         }
+        assert serie != null;
         holder.serieCover.setImageBitmap(BitmapFactory.decodeByteArray(serie.serieImage,0,serie.serieImage.length));
-        holder.serieMetaData.setTitle(serie.serieName);
-        holder.serieMetaData.setSubtitle(serie.firstCategory + ", " + serie.secondCategory);
+        holder.title.setText(serie.serieName);
+        holder.categories.setText(serie.firstCategory + ", " + serie.secondCategory);
         return view;
     }
 
@@ -70,6 +74,18 @@ public class MainListAdapter extends ArrayAdapter<Serie> {
     public long getItemId(int i) {
         return 0;
     }
-
-
+    
+    @Override
+    public void add(Serie serie) {
+        series.add(serie);
+        notifyDataSetChanged();
+        super.add(serie);
+    }
+    
+    @Override
+    public void remove(Serie serie) {
+        series.remove(serie);
+        notifyDataSetChanged();
+        super.remove(serie);
+    }
 }

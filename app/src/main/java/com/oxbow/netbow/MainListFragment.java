@@ -24,24 +24,33 @@ import java.util.List;
 
 public class MainListFragment extends Fragment {
 Context activity;
+    GridView gridView;
     public MainListFragment() {
-        // Required empty public constructor
+    
     }
-
+    
     public static MainListFragment newInstance() {
         MainListFragment fragment = new MainListFragment();
         return fragment;
     }
-
+    
+    private void findViewById(View v) {
+        
+        gridView = v.findViewById(R.id.seriesList);
+    }
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = getActivity();
     }
-
+    
+    
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.main_series,container,false);
+        findViewById(view);
         List<Serie> s = new ArrayList<Serie>();
         Drawable d = getResources().getDrawable(R.drawable.shithappens);
         Bitmap b = ((BitmapDrawable)d).getBitmap();
@@ -49,11 +58,13 @@ Context activity;
         b.compress(Bitmap.CompressFormat.JPEG,100,stream);
         byte[] bitmapdata = stream.toByteArray();
         Serie serie = new Serie("Black Mirror","adasdasdad",2.0, bitmapdata, "dramat", "sci-fi");
+        Serie serie1 = new Serie("Black Mirror","adasdasdad",2.0, bitmapdata, "dramat", "sci-fi");
         s.add(serie);
+        s.add(serie1);
         MainListAdapter adapter = new MainListAdapter(activity,s);
-        GridView v = container.findViewById(R.id.seriesList);
-        v.setAdapter(adapter);
-        return inflater.inflate(R.layout.main_series, container, false);
+        gridView = view.findViewById(R.id.seriesList);
+        gridView.setAdapter(adapter);
+        return view;
     }
 
 

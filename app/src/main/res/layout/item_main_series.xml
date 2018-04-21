@@ -1,11 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/app_bar"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="160dp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="bottom"
+    android:layout_gravity="bottom"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView
+        android:id="@+id/tileCover"
+        android:layout_width="160dp"
+        android:layout_height="240dp"
+        android:scaleType="fitXY"/>
 
+        <FrameLayout
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/opacityblack"
+            android:onClick="titleClick"
+            android:layout_gravity="bottom">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+            <TextView
+                android:id="@+id/serieTitle"
+                android:textSize="22sp"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:maxLines="2"
+                android:autoSizeTextType="uniform"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:ignore="UnusedAttribute" />
+            <TextView
+                android:id="@+id/serieCategories"
+                android:layout_width="wrap_content"
+                android:textSize="15sp"
+                android:textAllCaps="true"
+                android:textColor="#FFFFFF"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_height="wrap_content" />
+            </LinearLayout>
+        </FrameLayout>
+    </RelativeLayout>
+
+<!--
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
@@ -40,5 +84,4 @@
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 app:layout_collapseMode="pin"/>
         </android.support.design.widget.CollapsingToolbarLayout>
-
-    </android.support.design.widget.AppBarLayout>
+-->
