@@ -10,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
@@ -32,7 +34,9 @@ public class MainListAdapter extends ArrayAdapter<Serie> {
 
     public class ViewHolder {
         ImageView serieCover;
-        TextView title,categories;
+        TextView title,categories, bigTitle, description;
+        FrameLayout minFrame;
+        RelativeLayout bigFrame;
     }
 
     @SuppressLint("SetTextI18n")
@@ -49,6 +53,10 @@ public class MainListAdapter extends ArrayAdapter<Serie> {
             holder.serieCover = view.findViewById(R.id.tileCover);
             holder.title = view.findViewById(R.id.serieTitle);
             holder.categories = view.findViewById(R.id.serieCategories);
+            holder.bigTitle = view.findViewById(R.id.bigTitle);
+            holder.description = view.findViewById(R.id.tileDescription);
+            holder.bigFrame = view.findViewById(R.id.itemDetails);
+            holder.minFrame = view.findViewById(R.id.littleLabel);
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();
@@ -57,6 +65,23 @@ public class MainListAdapter extends ArrayAdapter<Serie> {
         holder.serieCover.setImageBitmap(BitmapFactory.decodeByteArray(serie.serieImage,0,serie.serieImage.length));
         holder.title.setText(serie.serieName);
         holder.categories.setText(serie.firstCategory + ", " + serie.secondCategory);
+        holder.bigTitle.setText(serie.serieName);
+        holder.description.setText(serie.serieDescription);
+        final ViewHolder holder1 = holder;
+        holder.minFrame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                holder1.bigFrame.setVisibility(View.VISIBLE);
+                holder1.minFrame.setVisibility(View.INVISIBLE);
+            }
+        });
+        holder.bigFrame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                holder1.bigFrame.setVisibility(View.INVISIBLE);
+                holder1.minFrame.setVisibility(View.VISIBLE);
+            }
+        });
         return view;
     }
 

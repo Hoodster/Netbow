@@ -57,8 +57,8 @@ Context activity;
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         b.compress(Bitmap.CompressFormat.JPEG,100,stream);
         byte[] bitmapdata = stream.toByteArray();
-        Serie serie = new Serie("Black Mirror","adasdasdad",2.0, bitmapdata, "dramat", "sci-fi");
-        Serie serie1 = new Serie("Black Mirror","adasdasdad",2.0, bitmapdata, "dramat", "sci-fi");
+        Serie serie = new Serie("Black Mirror","Trzy historie osadzone w przyszłości, opowiedziane w trzech odcinkach. Każda z nich opowiada o innych przykrych konsekwencjach rozwoju naszej cywilizacji, pokazując w sposób karykaturalny do czego może dojść jeśli nic się nie zmieni.",2.0, bitmapdata, "dramat", "sci-fi");
+        Serie serie1 = new Serie("Black Mirror","Trzy historie osadzone w przyszłości, opowiedziane w trzech odcinkach. Każda z nich opowiada o innych przykrych konsekwencjach rozwoju naszej cywilizacji, pokazując w sposób karykaturalny do czego może dojść jeśli nic się nie zmieni. W każdej mamy do czynienia z różnym problemem społeczno-obyczajowym osadzonym w różnej futurystycznej perspektywie czasowej. W serialu zostaje poruszony między innymi problem przekraczania barier obyczajowych w imię sztuki, zgubnego wpływu nowych technologii na życie osobiste, czy podporządkowania życia regułom telewizji i portali społecznościowych, gdzie nic już nie jest prawdziwe. ",2.0, bitmapdata, "dramat", "sci-fi");
         s.add(serie);
         s.add(serie1);
         MainListAdapter adapter = new MainListAdapter(activity,s);
@@ -66,6 +66,7 @@ Context activity;
         gridView.setAdapter(adapter);
         return view;
     }
+    
 
 
 }
