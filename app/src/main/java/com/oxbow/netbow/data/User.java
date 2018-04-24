@@ -1,4 +1,4 @@
-package com.oxbow.netbow;
+package com.oxbow.netbow.data;
 
 /**
  * Created by kubap on 15.04.2018.
