@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayout"
+    android:gravity="center" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.oxbow.netbow.LoginActivity">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/background"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_gravity="top"
+        android:layout_marginTop="80dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/netbow" />
+
+    <!--LOGIN-->
+    <RelativeLayout
+        android:id="@+id/loginContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+<EditText
+    android:id="@+id/loginLogin"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="30dp"
+    android:layout_marginRight="30dp"
+    android:hint="login"
+    android:layout_marginBottom="20dp"/>
+    <EditText
+        android:id="@+id/passwordLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/loginLogin"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:hint="hasło"
+        android:inputType="textPassword"
+        android:layout_marginBottom="30dp"/>
+
+    <Button
+        android:id="@+id/tryLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/passwordLogin"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/roundbutton"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="zaloguj"/>
+    </RelativeLayout>
+    <!--REGISTER-->
+    <RelativeLayout
+        android:id="@+id/registerContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_gravity="center">
+        <EditText
+            android:id="@+id/registerLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:hint="login"
+            android:layout_marginBottom="20dp"/>
+
+        <EditText
+            android:id="@+id/registerPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/registerLogin"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:hint="hasło"
+            android:inputType="textPassword"
+            android:layout_marginBottom="30dp"/>
+
+        <Button
+            android:id="@+id/tryRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/registerPassword"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/roundbutton"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+
+            android:text="zarejestruj"/>
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/changeView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:layout_gravity="bottom|center_horizontal"
+        style="@style/Base.Widget.AppCompat.Button.Borderless"
+        android:text="nie masz konta?"/>
+</android.support.design.widget.CoordinatorLayout>

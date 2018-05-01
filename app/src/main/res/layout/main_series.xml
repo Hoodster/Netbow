@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainListFragment">
+    <ProgressBar
+        android:id="@+id/progessSerieList"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:visibility="gone"
+        android:layout_gravity="center"/>
+<GridView
+    android:id="@+id/seriesList"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    tools:listitem="@layout/item_main_series"
+    android:columnWidth="160dp"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:stretchMode="spacingWidthUniform"
+    android:horizontalSpacing="4dp"
+    android:verticalSpacing="5dp"
+    android:numColumns="auto_fit"/>
+</FrameLayout>
