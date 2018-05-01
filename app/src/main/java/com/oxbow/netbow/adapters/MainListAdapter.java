@@ -5,21 +5,21 @@ import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import com.oxbow.netbow.R;
 import com.oxbow.netbow.data.Serie;
+import com.oxbow.netbow.imdb.TMDdConnect;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainListAdapter extends ArrayAdapter<Serie> {
@@ -45,6 +45,7 @@ public class MainListAdapter extends ArrayAdapter<Serie> {
     public View getView(int position, View view, ViewGroup viewGroup) {
         Serie serie = getItem(position);
         ViewHolder holder = new ViewHolder();
+        TMDdConnect td = new TMDdConnect();
 
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -62,10 +63,21 @@ public class MainListAdapter extends ArrayAdapter<Serie> {
             holder = (ViewHolder) view.getTag();
         }
         assert serie != null;
-        holder.serieCover.setImageBitmap(BitmapFactory.decodeByteArray(serie.serieImage,0,serie.serieImage.length));
-        holder.title.setText(serie.serieName);
-        holder.categories.setText(serie.firstCategory + ", " + serie.secondCategory);
-        holder.bigTitle.setText(serie.serieName);
+        
+        holder.serieCover.setImageBitmap(serie.seriePoster);
+        holder.title.setText(serie.serieTitle);
+        //RESIZE TITLE IF IS OUT OF SCOPE
+        while (holder.title.getLineCount() > 2) {
+            DisplayMetrics metrics = getContext().getResources().getDisplayMetrics();
+            float titleSize = holder.title.getTextSize() / metrics.density;
+            holder.title.setTextSize(titleSize - 1);
+        }
+        //END COMMENT
+        if (serie.secondGenre != null)
+            holder.categories.setText(serie.firstGenre + ", " + serie.secondGenre);
+        else
+            holder.categories.setText(serie.firstGenre);
+        holder.bigTitle.setText(serie.serieTitle);
         holder.description.setText(serie.serieDescription);
         final ViewHolder holder1 = holder;
         holder.minFrame.setOnClickListener(new View.OnClickListener() {

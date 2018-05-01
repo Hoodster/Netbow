@@ -29,7 +29,7 @@
                 android:textAllCaps="true"
                 android:textStyle="bold"
                 android:textColor="#FFFFFF"
-                android:maxLines="2"
+
                 android:autoSizeTextType="uniform"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="5dp"
