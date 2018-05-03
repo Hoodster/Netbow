@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/ic_home_black_24dp"
+        app:showAsAction="ifRoom"
         android:title="Seriale" />
+    <item
+        android:id="@+id/navigation_search"
+        android:icon="@drawable/ic_search_black_24dp"
+        app:showAsAction="ifRoom"
+        android:title="Szukaj"/>
 
     <item
         android:id="@+id/navigation_recommended"
         android:icon="@drawable/ic_dashboard_black_24dp"
+        app:showAsAction="always|withText"
         android:title="Polecane" />
 
     <item
         android:id="@+id/navigation_profile"
         android:icon="@drawable/profile"
+        app:showAsAction="always|withText"
         android:title="Profil" />
 
 </menu>

@@ -1,22 +1,18 @@
-package com.oxbow.netbow;
+package com.oxbow.netbow.fragments;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.GridView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.oxbow.netbow.R;
 import com.oxbow.netbow.adapters.MainListAdapter;
 import com.oxbow.netbow.data.Serie;
 import com.oxbow.netbow.imdb.TMDdConnect;
@@ -25,7 +21,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.util.ArrayList;
@@ -37,7 +32,7 @@ Context activity;
     GridView gridView;
     ProgressBar progressBar;
     List<Serie> series = new ArrayList<Serie>();
-    String url ="https://api.themoviedb.org/3/discover/tv?api_key=99453365bfe4540972684d60cf0c1b02&language=pl&sort_by=popularity.desc&include_null_first_air_dates=false";
+    String url ="https://api.themoviedb.org/3/discover/tv?api_key=99453365bfe4540972684d60cf0c1b02&language=pl&sort_by=popularity.desc&include_null_first_air_dates=false&page=";
     public MainListFragment() {
     
     }
@@ -65,16 +60,47 @@ Context activity;
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.main_series,container,false);
         findViewById(view);
-        new getSeries().execute();
+        gridView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView absListView, int i) {
+        
+            }
+    
+            @Override
+            public void onScroll(AbsListView absListView, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                if (firstVisibleItem == 0) {
+                    // check if we reached the top or bottom of the list
+                    View v = gridView.getChildAt(0);
+                    int offset = (v == null) ? 0 : v.getTop();
+                    if (offset == 0) {
+                        // reached the top:
+                       
+                    }
+                } else if (totalItemCount - visibleItemCount == firstVisibleItem){
+                    View v =  gridView.getChildAt(totalItemCount-1);
+                    int offset = (v == null) ? 0 : v.getTop();
+                    if (offset == 0) {
+                     //   n=n+1;
+                    //   new getSeries(n).execute();
+                    }
+                }
+            }
+        });
+        new getSeries(1).execute();
+        new getSeries(2).execute();
         return view;
     }
     
    private class getSeries extends AsyncTask<Void,Void,Void> {
-    
+    int p;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
             progressBar.setVisibility(View.VISIBLE);
+        }
+        public getSeries(int page) {
+            super();
+            p = page;
         }
        @Override
        protected Void doInBackground(Void... arg0)  {
@@ -82,7 +108,8 @@ Context activity;
            String gsonSt = null;
            Serie serie = null;
            try {
-               gsonSt = tmDdConnect.callService(url);
+               gsonSt = tmDdConnect.callService(url + p);
+              
            } catch (MalformedURLException | ProtocolException e) {
                e.printStackTrace();
            }
@@ -96,7 +123,7 @@ Context activity;
                       String title = s.getString("name");
                       String originaltitle = s.getString("original_name");
                       String description = s.getString("overview");
-                      double rating = s.getDouble("vote_average");
+                      float rating = Float.parseFloat(String.valueOf(s.getDouble("vote_average")));
                       String poster = "https://image.tmdb.org/t/p/w500" + s.getString("poster_path");
                       String background = "https://image.tmdb.org/t/p/w500" + s.getString("backdrop_path");
                       JSONArray genres = s.getJSONArray("genre_ids");
@@ -107,7 +134,7 @@ Context activity;
                       serie.serieTitle = title;
                       serie.originalTitle = originaltitle;
                       serie.serieDescription = description;
-                      serie.serieRating =rating;
+                      serie.serieRating = rating;
                       serie.seriePoster = tmDdConnect.loadImageFromWeb(poster);
                       serie.serieBackground = tmDdConnect.loadImageFromWeb(background);
                       serie.firstGenre = firstGenre;

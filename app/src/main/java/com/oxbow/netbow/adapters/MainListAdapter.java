@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -37,6 +38,7 @@ public class MainListAdapter extends ArrayAdapter<Serie> {
         TextView title,categories, bigTitle, description;
         FrameLayout minFrame;
         RelativeLayout bigFrame;
+        RatingBar rating;
     }
 
     @SuppressLint("SetTextI18n")
@@ -58,6 +60,7 @@ public class MainListAdapter extends ArrayAdapter<Serie> {
             holder.description = view.findViewById(R.id.tileDescription);
             holder.bigFrame = view.findViewById(R.id.itemDetails);
             holder.minFrame = view.findViewById(R.id.littleLabel);
+            holder.rating = view.findViewById(R.id.tileRating);
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();
@@ -79,6 +82,7 @@ public class MainListAdapter extends ArrayAdapter<Serie> {
             holder.categories.setText(serie.firstGenre);
         holder.bigTitle.setText(serie.serieTitle);
         holder.description.setText(serie.serieDescription);
+        holder.rating.setRating(serie.serieRating / 2);
         final ViewHolder holder1 = holder;
         holder.minFrame.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,5 +128,9 @@ public class MainListAdapter extends ArrayAdapter<Serie> {
         series.remove(serie);
         notifyDataSetChanged();
         super.remove(serie);
+    }
+    
+    public void filter(String name) {
+    
     }
 }
