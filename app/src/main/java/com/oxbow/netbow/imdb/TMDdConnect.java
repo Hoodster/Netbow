@@ -127,4 +127,14 @@ public class TMDdConnect {
             return null;
         }
     }
+    
+    public String cutOverview(String overview) {
+        String newOverview = overview;
+        
+        if (overview.length() > 214) {
+          int count = overview.lastIndexOf(".",214);
+          newOverview = overview.substring(0, count + 1);
+        }
+        return newOverview;
+    }
 }

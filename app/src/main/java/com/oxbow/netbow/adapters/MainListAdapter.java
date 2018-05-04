@@ -81,7 +81,7 @@ public class MainListAdapter extends ArrayAdapter<Serie> {
         else
             holder.categories.setText(serie.firstGenre);
         holder.bigTitle.setText(serie.serieTitle);
-        holder.description.setText(serie.serieDescription);
+        holder.description.setText(td.cutOverview(serie.serieDescription));
         holder.rating.setRating(serie.serieRating / 2);
         final ViewHolder holder1 = holder;
         holder.minFrame.setOnClickListener(new View.OnClickListener() {
@@ -128,9 +128,5 @@ public class MainListAdapter extends ArrayAdapter<Serie> {
         series.remove(serie);
         notifyDataSetChanged();
         super.remove(serie);
-    }
-    
-    public void filter(String name) {
-    
     }
 }

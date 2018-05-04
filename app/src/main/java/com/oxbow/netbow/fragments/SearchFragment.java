@@ -71,15 +71,15 @@ public class SearchFragment extends Fragment {
         });
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
+            public boolean onQueryTextSubmit(String newText) {
+                String textquery = newText.replace(" ","%20");
+                String query = "https://api.themoviedb.org/3/search/tv?api_key=99453365bfe4540972684d60cf0c1b02&language=pl&query="+textquery+"&page=1";
+                new getResults(query).execute();
                 return false;
             }
     
             @Override
             public boolean onQueryTextChange(String newText) {
-                String textquery = newText.replace(" ","%20");
-                String query = "https://api.themoviedb.org/3/search/tv?api_key=99453365bfe4540972684d60cf0c1b02&language=pl&query="+textquery+"&page=1";
-                new getResults(query).execute();
                 return false;
             }
         });
@@ -111,6 +111,7 @@ public class SearchFragment extends Fragment {
                 try {
                     JSONObject jsonObject = new JSONObject(gsonSt);
                     JSONArray results = jsonObject.getJSONArray("results");
+                    series.clear();
                     for (int i = 0; i < results.length(); i ++) {
                         JSONObject s = results.getJSONObject(i);
                         String id = s.getString("id");
