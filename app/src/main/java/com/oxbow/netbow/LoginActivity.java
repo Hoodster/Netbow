@@ -111,6 +111,7 @@ DatabaseReference db;
                         String password = "";
                         String typedpassword = loginPassword.getText().toString();
                         User user = dataSnapshot.child(loginLogin.getText().toString()).getValue(User.class);
+                        //if login is valid decode its password
                         if (user != null) {
                             byte[] bytepassword = Base64.decode(user.password, Base64.DEFAULT);
                             password = new String(bytepassword, StandardCharsets.UTF_8);
@@ -118,11 +119,14 @@ DatabaseReference db;
                             Snackbar.make(coordinatorLayout,"Czas najwyższy zapłacić za ten serwer...", Snackbar.LENGTH_LONG).show();
                         }
 
+                        //password validation
                         if (typedpassword.equals(password)) {
+                            //START save login info in app's preferences
                             SharedPreferences loginPref = getSharedPreferences("loginPrefs",Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = loginPref.edit();
                             editor.putString("login", loginLogin.getText().toString());
                             editor.commit();
+                            //END
                             Snackbar.make(coordinatorLayout, "Zalogowałeś się jako " + loginLogin.getText().toString() + ".",Snackbar.LENGTH_LONG).show();
                             //back to main activity
                             Intent i = new Intent(LoginActivity.this, MainActivity.class);

@@ -2,11 +2,9 @@ package com.oxbow.netbow.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.DisplayMetrics;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +17,7 @@ import android.widget.TextView;
 
 import com.oxbow.netbow.R;
 import com.oxbow.netbow.data.Serie;
-import com.oxbow.netbow.imdb.TMDdConnect;
+import com.oxbow.netbow.tmdb.TMDdConnect;
 
 import java.util.List;
 

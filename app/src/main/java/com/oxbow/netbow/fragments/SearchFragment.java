@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.support.v7.widget.SearchView;
 import android.widget.GridView;
 import android.widget.ProgressBar;
@@ -17,7 +16,7 @@ import android.widget.Toast;
 import com.oxbow.netbow.R;
 import com.oxbow.netbow.adapters.MainListAdapter;
 import com.oxbow.netbow.data.Serie;
-import com.oxbow.netbow.imdb.TMDdConnect;
+import com.oxbow.netbow.tmdb.TMDdConnect;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,8 +26,6 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.content.Context.INPUT_METHOD_SERVICE;
 
 public class SearchFragment extends Fragment {
     SearchView searchView;

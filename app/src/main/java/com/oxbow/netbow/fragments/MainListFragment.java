@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.oxbow.netbow.R;
 import com.oxbow.netbow.adapters.MainListAdapter;
 import com.oxbow.netbow.data.Serie;
-import com.oxbow.netbow.imdb.TMDdConnect;
+import com.oxbow.netbow.tmdb.TMDdConnect;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -86,6 +86,8 @@ Context activity;
                 }
             }
         });
+        series.clear();
+        //get first two pages
         new getSeries(1).execute();
         new getSeries(2).execute();
         return view;
@@ -96,14 +98,17 @@ Context activity;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            //run progress ring
             progressBar.setVisibility(View.VISIBLE);
         }
+        //get page request
         public getSeries(int page) {
             super();
             p = page;
         }
        @Override
        protected Void doInBackground(Void... arg0)  {
+            //get json data
            TMDdConnect tmDdConnect = new TMDdConnect();
            String gsonSt = null;
            Serie serie = null;
