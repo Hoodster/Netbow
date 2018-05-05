@@ -1,9 +1,7 @@
-package com.oxbow.netbow.imdb;
+package com.oxbow.netbow.tmdb;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -22,6 +20,7 @@ public class TMDdConnect {
     
     }
     
+    //Method sends URL service request
     public String callService(String reqUrl) throws MalformedURLException, ProtocolException {
         String response = null;
         try {
@@ -49,6 +48,7 @@ public class TMDdConnect {
         return sb.toString();
     }
     
+    //Method sets genre based on its ID from The Movie Database
     public String getGenre(int id) {
         String genre = null;
         switch (id) {
@@ -114,6 +114,7 @@ public class TMDdConnect {
         return genre;
     }
     
+    //Method is getting an image from URL jpg and turns it into bitmap
     public Bitmap loadImageFromWeb(String src) {
         try {
             URL url = new URL(src);
@@ -126,5 +127,16 @@ public class TMDdConnect {
         } catch (Exception e) {
             return null;
         }
+    }
+    
+    //When overview has more than 214 characters app is looking forward closest dot and ends overview with sentence which dot has ended.
+    public String cutOverview(String overview) {
+        String newOverview = overview;
+        
+        if (overview.length() > 214) {
+          int count = overview.lastIndexOf(".",214);
+          newOverview = overview.substring(0, count + 1);
+        }
+        return newOverview;
     }
 }

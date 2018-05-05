@@ -2,23 +2,22 @@ package com.oxbow.netbow.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.DisplayMetrics;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.oxbow.netbow.R;
 import com.oxbow.netbow.data.Serie;
-import com.oxbow.netbow.imdb.TMDdConnect;
+import com.oxbow.netbow.tmdb.TMDdConnect;
 
 import java.util.List;
 
@@ -37,6 +36,7 @@ public class MainListAdapter extends ArrayAdapter<Serie> {
         TextView title,categories, bigTitle, description;
         FrameLayout minFrame;
         RelativeLayout bigFrame;
+        RatingBar rating;
     }
 
     @SuppressLint("SetTextI18n")
@@ -58,6 +58,7 @@ public class MainListAdapter extends ArrayAdapter<Serie> {
             holder.description = view.findViewById(R.id.tileDescription);
             holder.bigFrame = view.findViewById(R.id.itemDetails);
             holder.minFrame = view.findViewById(R.id.littleLabel);
+            holder.rating = view.findViewById(R.id.tileRating);
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();
@@ -78,7 +79,8 @@ public class MainListAdapter extends ArrayAdapter<Serie> {
         else
             holder.categories.setText(serie.firstGenre);
         holder.bigTitle.setText(serie.serieTitle);
-        holder.description.setText(serie.serieDescription);
+        holder.description.setText(td.cutOverview(serie.serieDescription));
+        holder.rating.setRating(serie.serieRating / 2);
         final ViewHolder holder1 = holder;
         holder.minFrame.setOnClickListener(new View.OnClickListener() {
             @Override
