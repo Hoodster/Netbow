@@ -3,13 +3,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainListFragment">
+    tools:context=".fragments.MainListFragment">
     <ProgressBar
         android:id="@+id/progessSerieList"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:visibility="gone"
         android:layout_gravity="center"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:text="NUDZI MI SIĘ"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/roundbutton"
+        android:elevation="2dp"
+        android:layout_gravity="top|center_horizontal"/>
 <GridView
     android:id="@+id/seriesList"
     android:layout_height="match_parent"

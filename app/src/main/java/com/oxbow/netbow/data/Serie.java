@@ -7,7 +7,7 @@ public class Serie {
     public String serieTitle;
     public String originalTitle;
     public String serieDescription;
-    public double serieRating;
+    public float serieRating;
     public Bitmap seriePoster;
     public Bitmap serieBackground;
     public String firstGenre;
@@ -17,7 +17,7 @@ public class Serie {
 
     public Serie() {}
 
-    public Serie(String title, String description, double rating, Bitmap poster, String genre1, String genre2) {
+    public Serie(String title, String description, float rating, Bitmap poster, String genre1, String genre2) {
         this.serieTitle = title;
         this.serieDescription = description;
         this.serieRating = rating;
@@ -25,7 +25,7 @@ public class Serie {
         this.firstGenre = genre1;
         this.secondGenre = genre2;
     }
-    public Serie(String title, String originaltitle, String description, double rating, Bitmap poster, Bitmap background, String genre1, String genre2) {
+    public Serie(String title, String originaltitle, String description, float rating, Bitmap poster, Bitmap background, String genre1, String genre2) {
         this.serieTitle = title;
         this.originalTitle = originaltitle;
         this.serieDescription = description;

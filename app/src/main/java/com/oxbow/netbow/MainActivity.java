@@ -1,20 +1,17 @@
 package com.oxbow.netbow;
 
 import android.annotation.SuppressLint;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import com.oxbow.netbow.fragments.MainListFragment;
+import com.oxbow.netbow.fragments.SearchFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,10 +32,17 @@ public class MainActivity extends AppCompatActivity {
                             .addToBackStack(null)
                             .commit();
                     return true;
+                case R.id.navigation_search:
+                    manager.beginTransaction()
+                            .replace(R.id.frame_container, new SearchFragment())
+                            .addToBackStack(null)
+                            .commit();
+                    return true;
                 case R.id.navigation_recommended:
                     return true;
                 case R.id.navigation_profile:
                     return true;
+                
             }
             return false;
         }
@@ -48,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         SharedPreferences loginPref = getSharedPreferences("loginPrefs",MODE_PRIVATE);
         String login = loginPref.getString("login",null);
 
@@ -59,7 +62,9 @@ public class MainActivity extends AppCompatActivity {
 
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        BottomNavViewHelp.removeShiftMode(navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        navigation.setSelectedItemId(R.id.navigation_home);
     }
 
     @Override
