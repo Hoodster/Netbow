@@ -1,6 +1,7 @@
 package com.oxbow.netbow.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,11 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.oxbow.netbow.MainActivity;
 import com.oxbow.netbow.R;
+import com.oxbow.netbow.SerieDetails;
 import com.oxbow.netbow.adapters.MainListAdapter;
 import com.oxbow.netbow.data.Serie;
 import com.oxbow.netbow.tmdb.TMDdConnect;
@@ -60,6 +64,16 @@ Context activity;
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.main_series,container,false);
         findViewById(view);
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+              Serie s = series.get(i);
+              String chosenSerieId = s.serieId;
+              Intent intent = new Intent(activity, SerieDetails.class);
+              intent.putExtra("id", chosenSerieId);
+              startActivity(intent);
+            }
+        });
         gridView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView absListView, int i) {
