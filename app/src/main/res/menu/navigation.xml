@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/navigation_home"
-        android:icon="@drawable/ic_home_black_24dp"
+        android:icon="@drawable/serieicon"
         app:showAsAction="ifRoom"
         android:title="Seriale" />
     <item
@@ -15,7 +15,7 @@
 
     <item
         android:id="@+id/navigation_recommended"
-        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:icon="@drawable/recommendsicon"
         app:showAsAction="always|withText"
         android:title="Polecane" />
 

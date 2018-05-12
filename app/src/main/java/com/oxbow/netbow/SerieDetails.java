@@ -52,7 +52,7 @@ public class SerieDetails extends AppCompatActivity {
         setContentView(R.layout.activity_serie_details);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        fullDescription = findViewById(R.id.fullDescription);
+      //  fullDescription = findViewById(R.id.fullDescription);
         progressBar = findViewById(R.id.progress);
         background = findViewById(R.id.serieBackground);
         String id = getIntent().getExtras().getString("id");
@@ -65,7 +65,7 @@ public class SerieDetails extends AppCompatActivity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        
+        /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +73,7 @@ public class SerieDetails extends AppCompatActivity {
             
             }
         });
+        */
     }
     
   
@@ -107,8 +108,9 @@ public class SerieDetails extends AppCompatActivity {
                     float rating = Float.parseFloat(String.valueOf(s.getDouble("vote_average")));
                     String poster = "https://image.tmdb.org/t/p/w500" + s.getString("poster_path");
                     String background = "https://image.tmdb.org/t/p/w500" + s.getString("backdrop_path");
-                    // JSONArray genres = s.getJSONArray("genres");
-                    // String firstGenre = tmDdConnect.getGenre(genres.getInt(0));
+                     JSONArray genres = s.getJSONArray("genres");
+                     JSONObject d = genres.getJSONObject(0);
+                     String firstGenre = tmDdConnect.getGenre(d.getInt("id"));
     
                     serie = new Serie();
                     serie.serieId = id;
@@ -140,9 +142,10 @@ public class SerieDetails extends AppCompatActivity {
     
         @Override
         protected void onPostExecute(Serie result) {
+            progressBar.setVisibility(View.GONE);
             background.setImageBitmap(result.serieBackground);
             getSupportActionBar().setTitle(result.serieTitle);
-            fullDescription.setText(result.serieDescription);
+          //  fullDescription.setText(result.serieDescription);
         }
     }
     
