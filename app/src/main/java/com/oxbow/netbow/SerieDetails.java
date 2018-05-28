@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -15,10 +16,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.google.android.gms.tasks.Task;
 import com.oxbow.netbow.adapters.MainListAdapter;
@@ -40,11 +44,14 @@ import java.util.concurrent.TimeoutException;
 
 public class SerieDetails extends AppCompatActivity {
     String request = null;
-    ImageView background;
+    ImageView background, poster;
     getSeries task;
     Activity activity;
     ProgressBar progressBar;
-    TextView fullDescription;
+    TextView fullDescription, fulltitle, countryText, directorsText, episodesText, seriesText, languageText, genresText, originTitleText;
+    ToggleButton switchwishlisttoggle, commentsDescription;
+    CollapsingToolbarLayout collapsingToolbar;
+    RatingBar rating;
     Serie serie = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,9 +59,46 @@ public class SerieDetails extends AppCompatActivity {
         setContentView(R.layout.activity_serie_details);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-      //  fullDescription = findViewById(R.id.fullDescription);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        
+        collapsingToolbar = findViewById(R.id.toolbar_layout);
+        collapsingToolbar.setExpandedTitleColor(getResources().getColor(R.color.transparent));
+        
+        fullDescription = findViewById(R.id.fullDescription);
+        fulltitle = findViewById(R.id.detailsTitle);
+
+        countryText = findViewById(R.id.originCountryText);
+        directorsText = findViewById(R.id.directorsText);
+        episodesText = findViewById(R.id.episodesCountText);
+        seriesText = findViewById(R.id.serieCountText);
+        languageText = findViewById(R.id.originLanguageText);
+        genresText = findViewById(R.id.genresText);
+        originTitleText = findViewById(R.id.originTitleText);
+        
+        rating = findViewById(R.id.detailsRating);
+        
         progressBar = findViewById(R.id.progress);
+        
         background = findViewById(R.id.serieBackground);
+        poster = findViewById(R.id.serieDetailsPoster);
+        
+        switchwishlisttoggle = findViewById(R.id.switchwishlist);
+        commentsDescription = findViewById(R.id.commentsAndDescriptionToggle);
+        commentsDescription.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    fullDescription.setVisibility(View.VISIBLE);
+                } else {
+                    fullDescription.setVisibility(View.GONE);
+                }
+        
+            }
+        });
+        
+        
+        
+        
         String id = getIntent().getExtras().getString("id");
         request = "https://api.themoviedb.org/3/tv/"+id+"?api_key=99453365bfe4540972684d60cf0c1b02&language=pl";
     
@@ -65,15 +109,6 @@ public class SerieDetails extends AppCompatActivity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        /*
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            
-            }
-        });
-        */
     }
     
   
@@ -111,6 +146,16 @@ public class SerieDetails extends AppCompatActivity {
                      JSONArray genres = s.getJSONArray("genres");
                      JSONObject d = genres.getJSONObject(0);
                      String firstGenre = tmDdConnect.getGenre(d.getInt("id"));
+                     int seriesNo = s.getInt("number_of_seasons");
+                     int episodesNo = s.getInt("number_of_episodes");
+                     String language = s.getJSONArray("languages").getString(0);
+                     String originCountry = s.getJSONArray("origin_country").getString(0);
+                     JSONArray producers = s.getJSONArray("created_by");
+                     JSONArray genreslist = s.getJSONArray("genres");
+                     String homepage = s.getString("homepage");
+                     
+                     
+                     
     
                     serie = new Serie();
                     serie.serieId = id;
@@ -120,22 +165,33 @@ public class SerieDetails extends AppCompatActivity {
                     serie.serieRating = rating;
                     serie.seriePoster = tmDdConnect.loadImageFromWeb(poster);
                     serie.serieBackground = tmDdConnect.loadImageFromWeb(background);
-                       /* serie.firstGenre = firstGenre;
+                    serie.episodesNumber = episodesNo;
+                    serie.seriesNumber = seriesNo;
+                    serie.originLanguage = language;
+                    serie.originCountry = originCountry;
+                    serie.homepage = homepage;
+                    ArrayList<String> producersHelper = new ArrayList<String>();
+                    ArrayList<String> genresHelper = new ArrayList<String>();
+                    //producers
+                    for (int i = 0; i < producers.length(); i++) {
+                        JSONObject producersObject =  producers.getJSONObject(i);
+                        String producername = producersObject.getString("name");
+                        producersHelper.add(producername);
+                    }
+                    
+                    for (int i = 0; i < genres.length(); i++) {
+                        JSONObject genresObject = genres.getJSONObject(i);
+                        String genrename = genresObject.getString("name");
+                        genresHelper.add(genrename);
                         
-                        if (genres.length() > 1) {
-                            String secondGenre = tmDdConnect.getGenre(genres.getInt(1));
-                            if (secondGenre != null)
-                                serie.secondGenre = secondGenre;
-                               
-                        } */
-    
-    
+                    }
+                    serie.producers = producersHelper;
+                    serie.genres = genresHelper;
                 } catch (JSONException e) {
-    
+                    Toast.makeText(getApplicationContext(), "Błąd pobierania z serwera", Toast.LENGTH_LONG).show();
                 }
             } else {
                 Toast.makeText(getApplicationContext(), "Błąd pobierania z serwera", Toast.LENGTH_LONG).show();
-    
             }
             return serie;
         }
@@ -143,9 +199,36 @@ public class SerieDetails extends AppCompatActivity {
         @Override
         protected void onPostExecute(Serie result) {
             progressBar.setVisibility(View.GONE);
+            
             background.setImageBitmap(result.serieBackground);
-            getSupportActionBar().setTitle(result.serieTitle);
-          //  fullDescription.setText(result.serieDescription);
+            poster.setImageBitmap(result.seriePoster);
+            
+            getSupportActionBar().setTitle("");
+            fullDescription.setText(result.serieDescription);
+            fulltitle.setText(result.serieTitle);
+            rating.setRating(result.serieRating / 2);
+            countryText.setText(result.originCountry);
+            languageText.setText(result.originLanguage);
+            episodesText.setText(String.valueOf(result.episodesNumber));
+            seriesText.setText(String.valueOf(result.seriesNumber));
+            originTitleText.setText(result.originalTitle);
+            String producersString = null, genreString = null;
+            for (int i = 0; i < result.producers.size(); i++) {
+                if (i == 0)
+                    producersString = result.producers.get(i);
+                else
+                    producersString = producersString + ("\n" + result.producers.get(i));
+            }
+            for (int i = 0; i < result.genres.size(); i++) {
+                if (i == 0)
+                    genreString = result.genres.get(i);
+                else
+                    genreString = genreString + ("\n" + result.genres.get(i));
+            }
+            directorsText.setText(producersString);
+            genresText.setText(genreString);
+            collapsingToolbar.setTitle(result.serieTitle);
+
         }
     }
     

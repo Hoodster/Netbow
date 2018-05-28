@@ -2,6 +2,8 @@ package com.oxbow.netbow.data;
 
 import android.graphics.Bitmap;
 
+import java.util.ArrayList;
+
 public class Serie {
     public String serieId;
     public String serieTitle;
@@ -12,7 +14,13 @@ public class Serie {
     public Bitmap serieBackground;
     public String firstGenre;
     public String secondGenre;
-    
+    public String originCountry;
+    public String originLanguage;
+    public ArrayList<String> producers;
+    public ArrayList<String> genres;
+    public String homepage;
+    public int episodesNumber;
+    public int seriesNumber;
 
 
     public Serie() {}
