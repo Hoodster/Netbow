@@ -34,7 +34,7 @@
     android:layout_height="wrap_content"
     android:layout_marginLeft="30dp"
     android:layout_marginRight="30dp"
-    android:hint="login"
+    android:hint="e-mail"
     android:layout_marginBottom="20dp"/>
     <EditText
         android:id="@+id/passwordLogin"
@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:hint="login"
+            android:hint="e-mail"
             android:layout_marginBottom="20dp"/>
 
         <EditText
