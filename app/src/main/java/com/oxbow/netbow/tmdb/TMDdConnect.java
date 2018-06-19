@@ -122,9 +122,10 @@ public class TMDdConnect {
             connection.setDoInput(true);
             connection.connect();
             InputStream is = connection.getInputStream();
+            
             Bitmap b = BitmapFactory.decodeStream(is);
             return b;
-        } catch (Exception e) {
+        } catch (Exception | OutOfMemoryError e) {
             return null;
         }
     }

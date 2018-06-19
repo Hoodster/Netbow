@@ -1,6 +1,7 @@
 package com.oxbow.netbow.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,11 +9,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Task;
+import com.oxbow.netbow.MainActivity;
 import com.oxbow.netbow.R;
+import com.oxbow.netbow.SerieDetails;
 import com.oxbow.netbow.adapters.MainListAdapter;
 import com.oxbow.netbow.data.Serie;
 import com.oxbow.netbow.tmdb.TMDdConnect;
@@ -31,6 +37,7 @@ public class MainListFragment extends Fragment {
 Context activity;
     GridView gridView;
     ProgressBar progressBar;
+    
     List<Serie> series = new ArrayList<Serie>();
     String url ="https://api.themoviedb.org/3/discover/tv?api_key=99453365bfe4540972684d60cf0c1b02&language=pl&sort_by=popularity.desc&include_null_first_air_dates=false&page=";
     public MainListFragment() {
@@ -60,6 +67,16 @@ Context activity;
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.main_series,container,false);
         findViewById(view);
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+              Serie s = series.get(i);
+              String chosenSerieId = s.serieId;
+              Intent intent = new Intent(activity, SerieDetails.class);
+              intent.putExtra("id", chosenSerieId);
+              startActivity(intent);
+            }
+        });
         gridView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView absListView, int i) {
@@ -86,7 +103,18 @@ Context activity;
                 }
             }
         });
-        series.clear();
+        
+      Runnable r = new Runnable() {
+          @Override
+          public void run() {
+              series.clear();
+          }
+      };
+      try {
+          r.wait();
+      } catch (Exception e) {
+      
+      }
         //get first two pages
         new getSeries(1).execute();
         new getSeries(2).execute();
@@ -147,6 +175,7 @@ Context activity;
                            String secondGenre = tmDdConnect.getGenre(genres.getInt(1));
                            serie.secondGenre = secondGenre;
                        }
+                       
                       series.add(serie);
                    }
                } catch (final JSONException e) {}
