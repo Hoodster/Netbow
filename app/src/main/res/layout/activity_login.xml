@@ -6,13 +6,15 @@
     android:gravity="center" android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.oxbow.netbow.LoginActivity">
+    <!--
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/background"/>
+        android:src="@drawable/background"/> -->
 
     <ImageView
+        android:id="@+id/welcomeLogo"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_gravity="top"
@@ -34,6 +36,7 @@
     android:layout_height="wrap_content"
     android:layout_marginLeft="30dp"
     android:layout_marginRight="30dp"
+    android:inputType="textEmailAddress"
     android:hint="e-mail"
     android:layout_marginBottom="20dp"/>
     <EditText
@@ -73,6 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
+            android:inputType="textEmailAddress"
             android:hint="e-mail"
             android:layout_marginBottom="20dp"/>
 
@@ -101,6 +105,32 @@
 
             android:text="zarejestruj"/>
     </RelativeLayout>
+    <!--NAME-->
+    <RelativeLayout
+        android:id="@+id/nameInsert"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_margin="4dp"
+        android:gravity="center">
+        <TextView
+            android:id="@+id/Introduction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Przedstawmy się.\nJak masz na imię?"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="40sp"/>
+        <EditText
+            android:id="@+id/newUserName"
+            android:layout_below="@id/Introduction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textSize="35sp"/>
+
+    </RelativeLayout>
 
     <Button
         android:id="@+id/changeView"
@@ -111,4 +141,18 @@
         android:layout_gravity="bottom|center_horizontal"
         style="@style/Base.Widget.AppCompat.Button.Borderless"
         android:text="nie masz konta?"/>
+    <Button
+        android:id="@+id/finalRegister"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:background="@drawable/roundbutton"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="wszystko gotowe!"/>
 </android.support.design.widget.CoordinatorLayout>

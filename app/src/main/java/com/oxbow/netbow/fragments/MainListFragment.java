@@ -12,8 +12,10 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Task;
 import com.oxbow.netbow.MainActivity;
 import com.oxbow.netbow.R;
 import com.oxbow.netbow.SerieDetails;
@@ -35,6 +37,7 @@ public class MainListFragment extends Fragment {
 Context activity;
     GridView gridView;
     ProgressBar progressBar;
+    
     List<Serie> series = new ArrayList<Serie>();
     String url ="https://api.themoviedb.org/3/discover/tv?api_key=99453365bfe4540972684d60cf0c1b02&language=pl&sort_by=popularity.desc&include_null_first_air_dates=false&page=";
     public MainListFragment() {
@@ -100,7 +103,18 @@ Context activity;
                 }
             }
         });
-        series.clear();
+        
+      Runnable r = new Runnable() {
+          @Override
+          public void run() {
+              series.clear();
+          }
+      };
+      try {
+          r.wait();
+      } catch (Exception e) {
+      
+      }
         //get first two pages
         new getSeries(1).execute();
         new getSeries(2).execute();
@@ -161,6 +175,7 @@ Context activity;
                            String secondGenre = tmDdConnect.getGenre(genres.getInt(1));
                            serie.secondGenre = secondGenre;
                        }
+                       
                       series.add(serie);
                    }
                } catch (final JSONException e) {}

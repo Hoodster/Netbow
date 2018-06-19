@@ -1,0 +1,20 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.oxbow.netbow.SerieDetails">
+
+    <item
+        android:id="@+id/edit_account"
+
+        android:title="edytuj profil"
+        app:showAsAction="never" />
+    <item android:id="@+id/info"
+        android:title="informacje"
+        app:showAsAction="never"/>
+    <item android:id="@+id/settings"
+        android:title="ustawienia"
+        app:showAsAction="never"/>
+    <item android:id="@+id/logout"
+        android:title="wyloguj się"
+        app:showAsAction="never"/>
+</menu>
