@@ -10,12 +10,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.oxbow.netbow.fragments.MainListFragment;
 import com.oxbow.netbow.fragments.SearchFragment;
 
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
+    FirebaseAuth auth = FirebaseAuth.getInstance();
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -52,12 +55,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        /*
         SharedPreferences loginPref = getSharedPreferences("loginPrefs",MODE_PRIVATE);
         String login = loginPref.getString("login",null);
 
         if (login == null) {
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
-        }
+        } */
 
 
         mTextMessage = (TextView) findViewById(R.id.message);
@@ -66,6 +70,16 @@ public class MainActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setSelectedItemId(R.id.navigation_home);
     }
+    
+    @Override
+    public void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = auth.getCurrentUser();
+        if (currentUser == null) {
+            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+        }
+    }
+    
 
     @Override
     protected void onResume()
