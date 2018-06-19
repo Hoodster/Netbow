@@ -13,12 +13,14 @@ import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.oxbow.netbow.fragments.MainListFragment;
+import com.oxbow.netbow.fragments.ProfileFragment;
 import com.oxbow.netbow.fragments.SearchFragment;
 
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
     FirebaseAuth auth = FirebaseAuth.getInstance();
+    public static FirebaseUser currentUser;
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -44,6 +46,10 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_recommended:
                     return true;
                 case R.id.navigation_profile:
+                    manager.beginTransaction()
+                            .replace(R.id.frame_container, new ProfileFragment())
+                            .addToBackStack(null)
+                            .commit();
                     return true;
                 
             }
@@ -55,14 +61,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        /*
-        SharedPreferences loginPref = getSharedPreferences("loginPrefs",MODE_PRIVATE);
-        String login = loginPref.getString("login",null);
-
-        if (login == null) {
-            startActivity(new Intent(MainActivity.this, LoginActivity.class));
-        } */
-
+    
 
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -74,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        FirebaseUser currentUser = auth.getCurrentUser();
+        currentUser = auth.getCurrentUser();
         if (currentUser == null) {
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
         }
