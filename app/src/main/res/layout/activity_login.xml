@@ -112,23 +112,28 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:layout_margin="4dp"
+        android:layout_margin="5dp"
         android:gravity="center">
         <TextView
             android:id="@+id/Introduction"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Przedstawmy się.\nJak masz na imię?"
-            android:gravity="center"
+            android:gravity="left"
+            android:fontFamily="@font/bebas"
             android:textStyle="bold"
             android:textSize="40sp"/>
         <EditText
             android:id="@+id/newUserName"
             android:layout_below="@id/Introduction"
-            android:layout_width="match_parent"
+            android:background="@color/transparent"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/bebas"
             android:layout_marginTop="5dp"
-            android:textSize="35sp"/>
+            android:textSize="40sp"/>
 
     </RelativeLayout>
 
